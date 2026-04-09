@@ -3,310 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Grand Vestiary | Luxury Wardrobe Exchange</title>
+    <title>THE HOTEL CLOSET | Elite Wardrobe Exchange</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Inter:wght@200;300;400&display=swap');
+
         :root {
-            --hotel-gold: #c5a059;
-            --off-white: #f9f8f6;
-            --deep-charcoal: #1a1a1a;
-            --tier-1: #b2bec3; 
-            --tier-2: #d1ccc0; 
-            --tier-3: #1a1a1a; 
+            --black: #000000;
+            --white: #ffffff;
+            --soft-gray: #f8f8f8;
+            --font-vogue: 'Bodoni Moda', serif;
+            --font-sans: 'Inter', sans-serif;
         }
 
         body {
-            font-family: 'Optima', sans-serif;
-            background-color: var(--off-white);
-            color: var(--deep-charcoal);
+            background-color: var(--white);
+            color: var(--black);
+            font-family: var(--font-sans);
             margin: 0;
             padding-bottom: 80px;
+            letter-spacing: -0.01em;
         }
 
-        /* --- Concierge Header --- */
         header {
-            background: #fff;
-            padding: 15px 20px;
+            background: var(--white);
+            padding: 40px 20px;
             text-align: center;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid #f0f0f0;
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 2000;
         }
 
         .hotel-logo {
-            font-family: 'Georgia', serif;
-            font-style: italic;
-            font-size: 22px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        .points-display {
-            font-size: 11px;
-            letter-spacing: 1px;
-            color: var(--hotel-gold);
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        /* --- Profile Header --- */
-        .profile-section {
-            max-width: 800px;
-            margin: 40px auto;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .avatar-container {
-            position: relative;
-        }
-
-        .profile-pic {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid var(--hotel-gold);
-            padding: 4px;
-        }
-
-        .profile-meta {
-            margin-left: 60px;
-        }
-
-        .username {
+            font-family: var(--font-vogue);
             font-size: 28px;
-            font-weight: 300;
-            margin: 0;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-bottom: 10px;
         }
 
-        .bio {
-            margin: 10px 0;
-            font-size: 14px;
-            color: #666;
-        }
-
-        /* --- The Feed / Grid --- */
-        .grid-container {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            padding: 20px;
-        }
-
-        .closet-item {
-            position: relative;
-            background: #fff;
-            aspect-ratio: 1/1;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .closet-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .closet-item:hover img {
-            transform: scale(1.08);
-        }
-
-        .tier-label {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(255,255,255,0.9);
-            padding: 4px 10px;
+        .concierge-status {
             font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+        }
+
+        .credit-count {
+            color: var(--black);
             font-weight: bold;
-            letter-spacing: 1px;
+            padding-left: 5px;
+        }
+
+        /* --- Pinterest style Feed --- */
+        .main-feed {
+            max-width: 1400px;
+            margin: 0 auto;
+            column-count: 3;
+            column-gap: 20px;
+            padding: 30px;
+        }
+
+        .closet-card {
+            break-inside: avoid;
+            margin-bottom: 30px;
+            position: relative;
+            background: var(--soft-gray);
+            overflow: hidden;
+        }
+
+        .closet-card img {
+            width: 100%;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        .closet-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .tier-indicator {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 6px 12px;
+            font-size: 9px;
+            letter-spacing: 2px;
+            font-weight: bold;
+            text-transform: uppercase;
             z-index: 10;
         }
 
-        /* --- Hover Actions --- */
-        .item-overlay {
+        /* --- Hover Overlay --- */
+        .card-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(26, 26, 26, 0.7);
+            background: rgba(0,0,0,0.03);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             opacity: 0;
             transition: 0.3s ease;
-            gap: 10px;
-        }
-
-        .closet-item:hover .item-overlay {
-            opacity: 1;
-        }
-
-        .action-btn {
-            background: white;
-            border: none;
-            width: 80%;
-            padding: 10px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
-            font-weight: bold;
         }
 
-        .action-btn.bid {
-            background: var(--hotel-gold);
-            color: white;
+        .closet-card:hover .card-overlay {
+            opacity: 1;
+            background: rgba(255,255,255,0.8);
         }
 
-        /* --- Notification Toast --- */
-        #notification-toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--deep-charcoal);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 2px;
-            font-size: 13px;
-            display: none;
-            z-index: 2000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        .btn-action {
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            width: 75%;
+            padding: 14px;
+            margin: 6px 0;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
         }
 
-        /* --- Footer Menu --- */
+        .btn-bid {
+            background: transparent;
+            border: 1px solid var(--black);
+            color: var(--black);
+        }
+
+        .owner-info {
+            padding: 15px 0;
+            font-family: var(--font-vogue);
+            font-style: italic;
+            font-size: 15px;
+        }
+
+        /* --- Bottom Concierge Bar --- */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: white;
-            border-top: 1px solid #eee;
+            background: var(--white);
             display: flex;
             justify-content: space-around;
-            padding: 20px 0;
-            z-index: 1000;
+            padding: 25px 0;
+            border-top: 1px solid #f0f0f0;
+            z-index: 2000;
         }
 
-        .nav-item {
-            color: var(--deep-charcoal);
-            font-size: 20px;
+        .nav-icon {
+            font-size: 18px;
+            color: var(--black);
             cursor: pointer;
-            position: relative;
+            opacity: 0.7;
+            transition: 0.3s;
         }
 
-        .dot {
-            width: 6px;
-            height: 6px;
-            background: red;
-            border-radius: 50%;
-            position: absolute;
-            top: -2px;
-            right: -2px;
+        .nav-icon:hover {
+            opacity: 1;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--black);
+            color: var(--white);
+            padding: 12px 30px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: none;
+            z-index: 3000;
+        }
+
+        @media (max-width: 800px) {
+            .main-feed { column-count: 2; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="hotel-logo">The Grand Vestiary</div>
-        <div class="points-display">Concierge Status: <span id="credit-count">15</span> Credits Available</div>
+        <div class="hotel-logo">The Hotel Closet</div>
+        <div class="concierge-status">Guest Concierge | <span class="credit-count" id="user-credits">100</span> Credits Available</div>
     </header>
 
-    <section class="profile-section">
-        <div class="avatar-container">
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop" class="profile-pic">
-        </div>
-        <div class="profile-meta">
-            <h2 class="username">@elodie_montpensier</h2>
-            <p class="bio">Transient collections. Dior & McQueen Archivist. <br><b>Tier 3 Resident.</b></p>
-            <button class="action-btn" style="width: auto; border: 1px solid #ddd; padding: 5px 20px;">Message Suite</button>
-        </div>
-    </section>
-
-    <div class="grid-container">
-        <div class="closet-item" data-tier="3" data-name="Alexander McQueen Blazer">
-            <div class="tier-label">TIER 3 | DIOR</div>
-            <img src="https://images.unsplash.com/photo-1548624149-f9b1859aa7d0?q=80&w=1000&auto=format&fit=crop">
-            <div class="item-overlay">
-                <button class="action-btn" onclick="requestBorrow(3)">Borrow (5 Credits)</button>
-                <button class="action-btn bid" onclick="placeBid()">Direct Bid</button>
+    <main class="main-feed">
+        <div class="closet-card">
+            <span class="tier-indicator">Tier 1 | Elite Designer</span>
+            <img src="https://images.unsplash.com/photo-1539109132314-347752418b30?auto=format&fit=crop&w=600&q=80">
+            <div class="card-overlay">
+                <button class="btn-action" onclick="swap(1)">Borrow (20 Credits)</button>
+                <button class="btn-action btn-bid" onclick="bid()">Place Bid</button>
             </div>
+            <div class="owner-info">@archiviste_paris</div>
         </div>
 
-        <div class="closet-item" data-tier="2" data-name="Camilla Silk Wrap">
-            <div class="tier-label">TIER 2 | CAMILLA</div>
-            <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c33?q=80&w=1000&auto=format&fit=crop">
-            <div class="item-overlay">
-                <button class="action-btn" onclick="requestBorrow(2)">Borrow (3 Credits)</button>
-                <button class="action-btn bid" onclick="placeBid()">Direct Bid</button>
+        <div class="closet-card">
+            <span class="tier-indicator">Tier 2 | Boutique Luxury</span>
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80">
+            <div class="card-overlay">
+                <button class="btn-action" onclick="swap(2)">Borrow (10 Credits)</button>
+                <button class="btn-action btn-bid" onclick="bid()">Place Bid</button>
             </div>
+            <div class="owner-info">@camilla_collector</div>
         </div>
 
-        <div class="closet-item" data-tier="1" data-name="Zara Vintage Knit">
-            <div class="tier-label">TIER 1 | ZARA</div>
-            <img src="https://images.unsplash.com/photo-1539109132314-347752418b30?q=80&w=1000&auto=format&fit=crop">
-            <div class="item-overlay">
-                <button class="action-btn" onclick="requestBorrow(1)">Borrow (1 Credit)</button>
-                <button class="action-btn bid" onclick="placeBid()">Direct Bid</button>
+        <div class="closet-card">
+            <span class="tier-indicator">Tier 3 | Fast Fashion</span>
+            <img src="https://images.unsplash.com/photo-1554568218-0f1715e72254?auto=format&fit=crop&w=600&q=80">
+            <div class="card-overlay">
+                <button class="btn-action" onclick="swap(3)">Borrow (5 Credits)</button>
+                <button class="btn-action btn-bid" onclick="bid()">Place Bid</button>
             </div>
+            <div class="owner-info">@zara_edit</div>
         </div>
-    </div>
+    </main>
 
-    <div id="notification-toast">Concierge: Request sent to @elodie_montpensier</div>
+    <div id="toast">Request processed by concierge.</div>
 
     <nav class="bottom-nav">
-        <div class="nav-item"><i class="fa-solid fa-hotel"></i></div>
-        <div class="nav-item"><i class="fa-solid fa-magnifying-glass"></i></div>
-        <div class="nav-item"><i class="fa-solid fa-plus-square"></i></div>
-        <div class="nav-item">
-            <i class="fa-solid fa-bell"></i>
-            <div class="dot"></div>
-        </div>
-        <div class="nav-item"><i class="fa-solid fa-door-open"></i></div>
+        <i class="fa-solid fa-hotel nav-icon"></i>
+        <i class="fa-solid fa-magnifying-glass nav-icon"></i>
+        <i class="fa-solid fa-bell nav-icon"></i>
+        <i class="fa-solid fa-user-tie nav-icon"></i>
     </nav>
 
     <script>
-        let userCredits = 15;
+        let credits = 100;
 
-        function requestBorrow(tier) {
+        function swap(tier) {
             let cost = 0;
-            if (tier === 3) cost = 5;
-            if (tier === 2) cost = 3;
-            if (tier === 1) cost = 1;
+            if(tier === 1) cost = 20;
+            if(tier === 2) cost = 10;
+            if(tier === 3) cost = 5;
 
-            if (userCredits >= cost) {
-                userCredits -= cost;
-                document.getElementById('credit-count').innerText = userCredits;
-                showToast(`Borrow request sent. Tier ${tier} validation required.`);
+            if(credits >= cost) {
+                credits -= cost;
+                document.getElementById('user-credits').innerText = credits;
+                showToast("Request sent to the suite owner.");
             } else {
-                showToast("Insufficient credits. Please visit the Front Desk to top up.");
+                showToast("Front Desk: Insufficient credits.");
             }
         }
 
-        function placeBid() {
-            const amount = prompt("Enter your direct bid ($):");
-            if (amount) {
-                showToast(`Bid of $${amount} submitted to the owner.`);
-            }
+        function bid() {
+            prompt("Submit your private offer to the owner ($):");
+            showToast("Bid sent for review.");
         }
 
-        function showToast(message) {
-            const toast = document.getElementById('notification-toast');
-            toast.innerText = message;
-            toast.style.display = 'block';
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 3000);
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.style.display = 'block';
+            setTimeout(() => { t.style.display = 'none'; }, 3000);
         }
     </script>
 </body>
 </html>
-
 
