@@ -7,235 +7,66 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;1,400&family=Inter:wght@200;300;400&display=swap');
-
-        :root {
-            --black: #000000;
-            --white: #ffffff;
-            --gray: #f9f9f9;
-            --font-vogue: 'Bodoni Moda', serif;
-            --font-sans: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: var(--white);
-            color: var(--black);
-            font-family: var(--font-sans);
-            margin: 0;
-            padding-bottom: 90px;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* --- Minimalist Header --- */
-        header {
-            background: var(--white);
-            padding: 45px 20px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-family: var(--font-vogue);
-            font-size: 32px;
-            letter-spacing: 10px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .status {
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #999;
-        }
-
-        .credits {
-            color: var(--black);
-            font-weight: 600;
-            border-bottom: 1px solid black;
-        }
-
-        /* --- Pinterest Masonry Feed --- */
-        .feed {
-            max-width: 1200px;
-            margin: 0 auto;
-            column-count: 3;
-            column-gap: 25px;
-            padding: 30px;
-        }
-
-        .item {
-            break-inside: avoid;
-            margin-bottom: 35px;
-            position: relative;
-        }
-
-        .item img {
-            width: 100%;
-            display: block;
-            filter: grayscale(100%);
-            transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
-        }
-
-        .item:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.02);
-        }
-
-        .tier-label {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: white;
-            padding: 7px 12px;
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* --- Overlay Actions --- */
-        .overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: 0.3s ease;
-        }
-
-        .item:hover .overlay {
-            opacity: 1;
-        }
-
-        .btn {
-            background: var(--black);
-            color: var(--white);
-            border: none;
-            width: 80%;
-            padding: 15px;
-            margin: 5px 0;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--black);
-            color: var(--black);
-        }
-
-        .meta {
-            padding: 15px 0;
-            font-family: var(--font-vogue);
-            font-style: italic;
-            font-size: 16px;
-        }
-
-        /* --- Concierge Navigation --- */
-        .nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: var(--white);
-            display: flex;
-            justify-content: space-around;
-            padding: 25px 0;
-            border-top: 1px solid #eee;
-        }
-
-        .nav i {
-            font-size: 18px;
-            cursor: pointer;
-            color: var(--black);
-        }
-
-        #toast {
-            position: fixed;
-            bottom: 110px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--black);
-            color: var(--white);
-            padding: 15px 30px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: none;
-            z-index: 2000;
-        }
-
-        @media (max-width: 768px) {
-            .feed { column-count: 2; }
-        }
+        :root { --b: #000; --w: #fff; --f-v: 'Bodoni Moda', serif; --f-s: 'Inter', sans-serif; }
+        body { background: var(--w); color: var(--b); font-family: var(--f-s); margin: 0; padding-bottom: 90px; }
+        header { padding: 40px 20px; text-align: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: #fff; z-index: 1000; }
+        .logo { font-family: var(--f-v); font-size: 28px; letter-spacing: 10px; text-transform: uppercase; margin-bottom: 10px; }
+        .status { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #999; }
+        .credits { color: #000; font-weight: 700; border-bottom: 1px solid #000; }
+        .feed { max-width: 1200px; margin: 0 auto; column-count: 3; column-gap: 25px; padding: 30px; }
+        .item { break-inside: avoid; margin-bottom: 35px; position: relative; }
+        .item img { width: 100%; display: block; filter: grayscale(100%); transition: 0.5s; }
+        .item:hover img { filter: grayscale(0%); }
+        .tier { position: absolute; top: 15px; left: 15px; background: #fff; padding: 5px 10px; font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.9); display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; transition: 0.3s; }
+        .item:hover .overlay { opacity: 1; }
+        .btn { background: #000; color: #fff; border: none; width: 80%; padding: 12px; margin: 5px 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; }
+        .meta { padding: 10px 0; font-family: var(--f-v); font-style: italic; font-size: 16px; }
+        .nav { position: fixed; bottom: 0; width: 100%; background: #fff; display: flex; justify-content: space-around; padding: 25px 0; border-top: 1px solid #eee; }
+        #toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: #000; color: #fff; padding: 12px 25px; font-size: 10px; display: none; z-index: 2000; }
+        @media (max-width: 768px) { .feed { column-count: 2; } }
     </style>
 </head>
 <body>
-
     <header>
         <div class="logo">The Hotel Closet</div>
-        <div class="status">Concierge: <span class="credits" id="cr">100</span> Credits available</div>
+        <div class="status">Concierge | <span class="credits" id="cr">100</span> Credits</div>
     </header>
-
     <main class="feed">
         <div class="item">
-            <span class="tier-label">Tier 1 | Elite</span>
-            <img src="https://images.unsplash.com/photo-1539109132314-347752418b30?auto=format&fit=crop&w=600&q=80">
-            <div class="overlay">
-                <button class="btn" onclick="go(1)">Borrow (20)</button>
-                <button class="btn btn-outline" onclick="bid()">Offer</button>
-            </div>
+            <span class="tier">Tier 1 | Elite</span>
+            <img src="https://images.unsplash.com/photo-1539109132314-347752418b30?auto=format&fit=crop&w=600">
+            <div class="overlay"><button class="btn" onclick="go(1)">Borrow (20)</button></div>
             <div class="meta">@paris_archives</div>
         </div>
-
         <div class="item">
-            <span class="tier-label">Tier 2 | Boutique</span>
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80">
-            <div class="overlay">
-                <button class="btn" onclick="go(2)">Borrow (10)</button>
-            </div>
+            <span class="tier">Tier 2 | Boutique</span>
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600">
+            <div class="overlay"><button class="btn" onclick="go(2)">Borrow (10)</button></div>
             <div class="meta">@camilla_luxe</div>
         </div>
-
         <div class="item">
-            <span class="tier-label">Tier 3 | Fast Fashion</span>
-            <img src="https://images.unsplash.com/photo-1554568218-0f1715e72254?auto=format&fit=crop&w=600&q=80">
-            <div class="overlay">
-                <button class="btn" onclick="go(3)">Borrow (5)</button>
-            </div>
+            <span class="tier">Tier 3 | Zara</span>
+            <img src="https://images.unsplash.com/photo-1554568218-0f1715e72254?auto=format&fit=crop&w=600">
+            <div class="overlay"><button class="btn" onclick="go(3)">Borrow (5)</button></div>
             <div class="meta">@zara_edit</div>
         </div>
     </main>
-
-    <div id="toast">Concierge: Request submitted.</div>
-
+    <div id="toast"></div>
     <nav class="nav">
         <i class="fa-solid fa-hotel"></i>
-        <i class="fa-solid fa-magnifying-glass"></i>
         <i class="fa-solid fa-bell"></i>
         <i class="fa-solid fa-user"></i>
     </nav>
-
     <script>
         let wallet = 100;
         function go(t) {
             let p = (t === 1) ? 20 : (t === 2 ? 10 : 5);
             if(wallet >= p) {
-                wallet -= p;
-                document.getElementById('cr').innerText = wallet;
-                msg("Request sent to the suite.");
-            } else {
-                msg("Front Desk: Credits required.");
-            }
+                wallet -= p; document.getElementById('cr').innerText = wallet;
+                msg("Concierge: Request logged.");
+            } else { msg("Insufficient credits."); }
         }
-        function bid() { prompt("Enter offer amount ($):"); msg("Bid logged."); }
         function msg(m) {
             const s = document.getElementById('toast');
             s.innerText = m; s.style.display = 'block';
