@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE HOTEL CLOSET | Elite Wardrobe Exchange</title>
+    <title>THE CLOSET HOTEL | A Private Wardrobe Social</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Inter:wght@200;300;400;600&display=swap');
 
         :root {
-            --black: #000000;
+            --black: #1a1a1a;
             --white: #ffffff;
-            --soft-gray: #f8f8f8;
-            --border-color: #eeeeee;
+            --soft-blush: #fff5f5;
+            --champagne: #f7e7ce;
+            --border-color: #f0f0f0;
             --font-vogue: 'Bodoni Moda', serif;
             --font-sans: 'Inter', sans-serif;
-            --tier-1: #D4AF37;
         }
 
         body {
@@ -32,7 +32,7 @@
         #auth-screen {
             position: fixed;
             inset: 0;
-            background: var(--white);
+            background: var(--soft-blush);
             z-index: 5000;
             display: flex;
             flex-direction: column;
@@ -45,6 +45,7 @@
         .auth-input {
             border: none;
             border-bottom: 1px solid var(--black);
+            background: transparent;
             padding: 15px;
             width: 100%;
             max-width: 300px;
@@ -72,10 +73,10 @@
             height: 190px;
             background: var(--black);
             color: var(--white);
-            border-radius: 12px;
+            border-radius: 20px;
             padding: 25px;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -83,16 +84,15 @@
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .gift-card:hover { transform: scale(1.05) rotate(-2deg); }
-
-        .card-logo { font-family: var(--font-vogue); font-size: 14px; letter-spacing: 3px; }
-        .card-value { font-size: 24px; font-weight: 200; }
+        .gift-card:hover { transform: scale(1.05); }
+        .card-logo { font-family: var(--font-vogue); font-size: 14px; letter-spacing: 3px; font-style: italic; }
+        .card-value { font-size: 24px; font-weight: 200; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px; }
         .card-holder { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; }
 
         /* --- Header --- */
         header {
             background: var(--white);
-            padding: 30px 20px;
+            padding: 25px 20px;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
             position: sticky;
@@ -102,57 +102,62 @@
 
         .hotel-logo {
             font-family: var(--font-vogue);
-            font-size: 24px;
-            letter-spacing: 6px;
-            text-transform: uppercase;
+            font-size: 26px;
+            letter-spacing: 2px;
             font-weight: 400;
             cursor: pointer;
         }
 
         .concierge-status {
             font-size: 9px;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: #999;
-            margin-top: 10px;
+            color: #b19494;
+            margin-top: 8px;
         }
 
         /* --- Grid & Cards --- */
-        .page { display: none; max-width: 1400px; margin: 0 auto; animation: fadeIn 0.5s ease; }
+        .page { display: none; max-width: 1200px; margin: 0 auto; animation: fadeIn 0.5s ease; }
         .page.active { display: block; }
 
-        .main-feed { column-count: 3; column-gap: 20px; padding: 30px; }
+        .main-feed { column-count: 3; column-gap: 15px; padding: 20px; }
 
         .closet-card {
             break-inside: avoid;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             position: relative;
-            background: var(--soft-gray);
+            background: var(--soft-blush);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
         }
 
-        .closet-card img { width: 100%; display: block; }
+        .closet-card img { width: 100%; display: block; filter: grayscale(10%); transition: 0.5s; }
+        .closet-card:hover img { filter: grayscale(0%); transform: scale(1.02); }
 
         .card-actions {
-            padding: 10px;
+            padding: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: var(--white);
         }
 
-        .heart-btn { cursor: pointer; transition: 0.3s; }
-        .heart-btn.active { color: #ff4757; }
+        .heart-btn { cursor: pointer; transition: 0.3s; font-size: 14px; }
+        .heart-btn.active { color: #ffb1b1; }
 
         /* --- Upload Section --- */
         #upload-preview {
-            width: 100%;
-            max-width: 300px;
-            height: 300px;
-            border: 1px dashed #ccc;
+            width: 250px;
+            height: 350px;
+            border: 1px solid var(--border-color);
+            background: var(--soft-blush);
             margin: 20px auto;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            border-radius: 100px 100px 0 0; /* Elegant arch shape */
         }
 
         #upload-preview img { width: 100%; height: 100%; object-fit: cover; }
@@ -161,43 +166,54 @@
         .btn-action {
             background: var(--black);
             color: var(--white);
-            border: 1px solid var(--black);
-            padding: 12px 25px;
-            font-size: 9px;
+            border: none;
+            padding: 14px 30px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
+            border-radius: 30px;
+            transition: 0.3s;
         }
+
+        .btn-action:hover { background: #333; letter-spacing: 3px; }
 
         .bottom-nav {
             position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: var(--white);
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-around;
-            padding: 20px 0;
-            border-top: 1px solid var(--border-color);
+            padding: 15px 0;
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             z-index: 3000;
         }
 
-        .nav-icon { font-size: 18px; opacity: 0.4; cursor: pointer; transition: 0.3s; }
-        .nav-icon.active { opacity: 1; }
+        .nav-icon { font-size: 18px; color: #ccc; cursor: pointer; transition: 0.3s; }
+        .nav-icon.active { color: var(--black); }
 
         #toast {
             position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--black);
-            color: var(--white);
-            padding: 12px 25px;
-            font-size: 10px;
+            top: 100px;
+            right: 20px;
+            background: var(--white);
+            border-left: 3px solid var(--black);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            color: var(--black);
+            padding: 15px 25px;
+            font-size: 11px;
             display: none;
             z-index: 4000;
+            font-style: italic;
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 800px) { .main-feed { column-count: 2; } }
     </style>
@@ -205,63 +221,66 @@
 <body>
 
     <div id="auth-screen">
-        <div class="hotel-logo" style="margin-bottom: 40px;">The Hotel Closet</div>
-        <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Check-in to your Suite</p>
-        <input type="text" id="username" class="auth-input" placeholder="FULL NAME">
-        <input type="email" id="useremail" class="auth-input" placeholder="EMAIL ADDRESS">
-        <button class="btn-action" style="margin-top: 20px; width: 300px;" onclick="registerUser()">Enter the Lobby</button>
+        <div class="hotel-logo" style="margin-bottom: 10px;">The Closet Hotel</div>
+        <p style="font-size: 10px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 40px;">Requests for Residency</p>
+        <input type="text" id="username" class="auth-input" placeholder="YOUR NAME">
+        <input type="email" id="useremail" class="auth-input" placeholder="EMAIL FOR THE CONCIERGE">
+        <button class="btn-action" style="margin-top: 30px; width: 250px;" onclick="registerUser()">Apply for a Key</button>
     </div>
 
     <div id="gift-card-overlay">
-        <h2 style="font-family: var(--font-vogue); font-weight: 400;">A Welcome Gift</h2>
-        <p style="font-size: 11px; margin-bottom: 40px;">TAP TO REDEEM YOUR CREDITS</p>
+        <h2 style="font-family: var(--font-vogue); font-weight: 400; font-style: italic;">Welcome Home, Darling.</h2>
+        <p style="font-size: 10px; margin-bottom: 40px; color: #999;">OPEN YOUR WELCOME ENVELOPE</p>
         <div class="gift-card" onclick="redeemCredits()">
-            <div class="card-logo">THE HOTEL CLOSET</div>
-            <div class="card-value">15.00 <span style="font-size: 12px;">CREDITS</span></div>
-            <div class="card-holder" id="card-name-display">GUEST</div>
+            <div class="card-logo">The Closet Hotel</div>
+            <div class="card-value">20.00 <span style="font-size: 12px;">CLOSET CREDITS</span></div>
+            <div class="card-holder" id="card-name-display">RESIDENT</div>
         </div>
     </div>
 
     <header>
-        <div class="hotel-logo" onclick="showPage('lobby')">The Hotel Closet</div>
-        <div class="concierge-status">Guest: <span id="display-name">...</span> | <span class="credit-count" id="user-credits">0</span> Credits</div>
+        <div class="hotel-logo" onclick="showPage('lobby')">The Closet Hotel</div>
+        <div class="concierge-status">Resident: <span id="display-name">...</span> | Suite Balance: <span id="user-credits">0</span></div>
     </header>
 
     <main id="lobby" class="page">
-        <div class="main-feed" id="global-feed">
-            </div>
+        <div style="text-align: center; padding: 20px;">
+            <p style="font-size: 10px; letter-spacing: 4px; color: #999; text-transform: uppercase;">The Promenade</p>
+        </div>
+        <div class="main-feed" id="global-feed"></div>
     </main>
 
     <main id="vault" class="page">
         <div style="text-align: center; padding: 40px;">
-            <h2 class="hotel-logo">Your Closet Vault</h2>
-            <button class="btn-action" onclick="showPage('upload-page')">+ Archive New Piece</button>
+            <h2 class="hotel-logo" style="font-size: 20px;">My Private Suite</h2>
+            <p style="font-size: 11px; color: #999; margin-bottom: 20px;">Your curated collection</p>
+            <button class="btn-action" onclick="showPage('upload-page')">Check-in a New Piece</button>
         </div>
         <div class="main-feed" id="user-closet-feed"></div>
     </main>
 
     <main id="upload-page" class="page">
         <div style="text-align: center; padding: 40px;">
-            <h2 class="hotel-logo">Add to Collection</h2>
+            <h2 class="hotel-logo" style="font-size: 20px;">Wardrobe Check-in</h2>
             <div id="upload-preview">
-                <p id="upload-text" style="font-size: 10px; color: #999;">SELECT IMAGE</p>
+                <p id="upload-text" style="font-size: 10px; color: #999; letter-spacing: 2px;">SELECT PIECE</p>
             </div>
             <input type="file" id="file-input" hidden accept="image/*">
-            <button class="btn-action" onclick="document.getElementById('file-input').click()">Choose Photo</button>
+            <button class="btn-action" style="background: none; color: black; border: 1px solid black;" onclick="document.getElementById('file-input').click()">Upload Portrait</button>
             <br><br>
-            <input type="text" id="item-name" class="auth-input" placeholder="ITEM NAME (e.g. Prada 1999 Skirt)">
+            <input type="text" id="item-name" class="auth-input" placeholder="PIECE DESCRIPTION (e.g. Silk Slip Dress)">
             <br>
-            <button class="btn-action" onclick="uploadItem()">Confirm Archive</button>
+            <button class="btn-action" onclick="uploadItem()">Confirm to Suite</button>
         </div>
     </main>
 
-    <div id="toast">Concierge: Request Processed</div>
+    <div id="toast">Concierge: Noted.</div>
 
     <nav class="bottom-nav">
-        <i class="fa-solid fa-hotel nav-icon" onclick="showPage('lobby', this)"></i>
-        <i class="fa-solid fa-magnifying-glass nav-icon" onclick="searchFriends()"></i>
-        <i class="fa-solid fa-plus-square nav-icon" onclick="showPage('upload-page', this)"></i>
-        <i class="fa-solid fa-user-tie nav-icon" onclick="showPage('vault', this)"></i>
+        <i class="fa-solid fa-door-open nav-icon" title="Promenade" onclick="showPage('lobby', this)"></i>
+        <i class="fa-solid fa-address-book nav-icon" title="Resident Directory" onclick="searchFriends()"></i>
+        <i class="fa-solid fa-plus nav-icon" title="Check-in" onclick="showPage('upload-page', this)"></i>
+        <i class="fa-solid fa-republican nav-icon" title="My Suite" onclick="showPage('vault', this)"></i>
     </nav>
 
     <script>
@@ -272,10 +291,9 @@
             liked: []
         };
 
-        // 1. REGISTRATION logic
         function registerUser() {
             const name = document.getElementById('username').value;
-            if(!name) return alert("Please enter your name");
+            if(!name) return alert("Please introduce yourself.");
             
             userData.name = name;
             document.getElementById('display-name').innerText = name;
@@ -285,17 +303,15 @@
             document.getElementById('gift-card-overlay').style.display = 'flex';
         }
 
-        // 2. GIFT CARD logic
         function redeemCredits() {
-            userData.credits = 15;
-            document.getElementById('user-credits').innerText = userData.credits;
+            userData.credits = 20;
+            document.getElementById('user-credits').innerText = userData.credits + " Credits";
             document.getElementById('gift-card-overlay').style.display = 'none';
             showPage('lobby');
-            showToast("15 Credits Added to your Vault");
+            showToast("Your suite has been credited with 20.00.");
             renderFeed();
         }
 
-        // 3. UPLOAD logic
         const fileInput = document.getElementById('file-input');
         fileInput.onchange = e => {
             const file = e.target.files[0];
@@ -309,29 +325,27 @@
 
         function uploadItem() {
             const name = document.getElementById('item-name').value;
-            if(!name || !userData.tempImg) return alert("Add a name and image");
+            if(!name || !userData.tempImg) return alert("Please provide details of the piece.");
 
-            const newItem = { id: Date.now(), name: name, img: userData.tempImg, owner: "@"+userData.name.replace(" ", "_").toLowerCase() };
+            const newItem = { id: Date.now(), name: name, img: userData.tempImg, owner: "@"+userData.name.replace(/\s+/g, '').toLowerCase() };
             userData.myItems.push(newItem);
             
-            // Reset
             document.getElementById('item-name').value = "";
-            document.getElementById('upload-preview').innerHTML = `<p style="font-size: 10px; color: #999;">SELECT IMAGE</p>`;
+            document.getElementById('upload-preview').innerHTML = `<p style="font-size: 10px; color: #999;">SELECT PIECE</p>`;
             
-            showToast("Item Archived in Vault");
+            showToast("The piece has been checked-in.");
             renderFeed();
             showPage('vault');
         }
 
-        // 4. FEED & INTERACTION logic
         function renderFeed() {
             const feed = document.getElementById('global-feed');
             const userFeed = document.getElementById('user-closet-feed');
             
-            // Hardcoded initial items
             const initialItems = [
-                { id: 1, name: "Elite Archive", img: "https://images.unsplash.com/photo-1539109132314-347752418b30?w=600", owner: "@archiviste_paris" },
-                { id: 2, name: "Boutique Luxury", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600", owner: "@camilla_collector" }
+                { id: 1, name: "Vintage Chanel", img: "https://images.unsplash.com/photo-1539109132314-347752418b30?w=600", owner: "@claire_beau" },
+                { id: 2, name: "Morning Gown", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600", owner: "@sophie_london" },
+                { id: 3, name: "Evening Archive", img: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600", owner: "@madame_x" }
             ];
 
             const allItems = [...initialItems, ...userData.myItems];
@@ -340,10 +354,10 @@
                 <div class="closet-card">
                     <img src="${item.img}">
                     <div class="card-actions">
-                        <span style="font-size: 10px;">${item.owner}</span>
+                        <span style="font-size: 9px; letter-spacing:1px; color:#888;">${item.owner}</span>
                         <div>
-                            <i class="fa-solid fa-heart heart-btn" onclick="toggleHeart(this)"></i>
-                            <i class="fa-solid fa-paper-plane" style="margin-left:10px; font-size:12px;" onclick="showToast('Bidding opened...')"></i>
+                            <i class="fa-regular fa-heart heart-btn" onclick="toggleHeart(this)"></i>
+                            <i class="fa-solid fa-envelope" style="margin-left:15px; font-size:12px; color:#ddd;" onclick="showToast('Sending an inquiry to the resident...')"></i>
                         </div>
                     </div>
                 </div>
@@ -356,12 +370,14 @@
 
         function toggleHeart(el) {
             el.classList.toggle('active');
-            if(el.classList.contains('active')) showToast("Saved to Favorites");
+            el.classList.toggle('fa-regular');
+            el.classList.toggle('fa-solid');
+            if(el.classList.contains('active')) showToast("Added to your wishlist.");
         }
 
         function searchFriends() {
-            const person = prompt("Search guest name or @suite:");
-            if(person) showToast("Searching suites for " + person);
+            const person = prompt("Search for a Resident's Suite:");
+            if(person) showToast("Escorting you to " + person + "'s Suite...");
         }
 
         function showPage(pageId, navEl) {
