@@ -15,7 +15,7 @@
             --border-color: #eeeeee;
             --font-vogue: 'Bodoni Moda', serif;
             --font-sans: 'Inter', sans-serif;
-            --tier-1: #D4AF37; /* Gold for Elite */
+            --tier-1: #D4AF37;
         }
 
         body {
@@ -28,7 +28,68 @@
             overflow-x: hidden;
         }
 
-        /* --- Header & Navigation --- */
+        /* --- Auth Overlay --- */
+        #auth-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            z-index: 5000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .auth-input {
+            border: none;
+            border-bottom: 1px solid var(--black);
+            padding: 15px;
+            width: 100%;
+            max-width: 300px;
+            margin: 10px 0;
+            font-family: var(--font-sans);
+            outline: none;
+            text-align: center;
+        }
+
+        /* --- Gift Card Logic --- */
+        #gift-card-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,0.98);
+            z-index: 6000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .gift-card {
+            width: 320px;
+            height: 190px;
+            background: var(--black);
+            color: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .gift-card:hover { transform: scale(1.05) rotate(-2deg); }
+
+        .card-logo { font-family: var(--font-vogue); font-size: 14px; letter-spacing: 3px; }
+        .card-value { font-size: 24px; font-weight: 200; }
+        .card-holder { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* --- Header --- */
         header {
             background: var(--white);
             padding: 30px 20px;
@@ -56,139 +117,58 @@
             margin-top: 10px;
         }
 
-        .credit-count {
-            color: var(--black);
-            font-weight: 600;
-        }
+        /* --- Grid & Cards --- */
+        .page { display: none; max-width: 1400px; margin: 0 auto; animation: fadeIn 0.5s ease; }
+        .page.active { display: block; }
 
-        /* --- Page Containers --- */
-        .page {
-            display: none;
-            max-width: 1400px;
-            margin: 0 auto;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Pinterest Feed Logic --- */
-        .main-feed {
-            column-count: 3;
-            column-gap: 20px;
-            padding: 30px;
-        }
+        .main-feed { column-count: 3; column-gap: 20px; padding: 30px; }
 
         .closet-card {
             break-inside: avoid;
             margin-bottom: 30px;
             position: relative;
             background: var(--soft-gray);
-            cursor: pointer;
         }
 
-        .closet-card img {
-            width: 100%;
-            display: block;
-            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-        }
+        .closet-card img { width: 100%; display: block; }
 
-        .closet-card:hover img {
-            transform: scale(1.02);
-        }
-
-        .tier-indicator {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(255,255,255,0.95);
-            padding: 5px 10px;
-            font-size: 8px;
-            letter-spacing: 1px;
-            font-weight: 700;
-            text-transform: uppercase;
-            z-index: 10;
-        }
-
-        .card-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,0.85);
+        .card-actions {
+            padding: 10px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .heart-btn { cursor: pointer; transition: 0.3s; }
+        .heart-btn.active { color: #ff4757; }
+
+        /* --- Upload Section --- */
+        #upload-preview {
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            border: 1px dashed #ccc;
+            margin: 20px auto;
+            display: flex;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: 0.3s ease;
+            overflow: hidden;
         }
 
-        .closet-card:hover .card-overlay {
-            opacity: 1;
-        }
+        #upload-preview img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- UI Elements --- */
+        /* --- Utilities --- */
         .btn-action {
             background: var(--black);
             color: var(--white);
             border: 1px solid var(--black);
-            width: 80%;
-            padding: 12px;
-            margin: 5px 0;
+            padding: 12px 25px;
             font-size: 9px;
             text-transform: uppercase;
             letter-spacing: 2px;
             cursor: pointer;
-            transition: 0.3s;
         }
 
-        .btn-bid {
-            background: transparent;
-            color: var(--black);
-        }
-
-        .btn-action:hover {
-            opacity: 0.7;
-        }
-
-        .owner-link {
-            padding: 12px 0;
-            font-family: var(--font-vogue);
-            font-style: italic;
-            font-size: 14px;
-            text-align: left;
-            border-bottom: 1px solid transparent;
-            display: inline-block;
-        }
-
-        /* --- Profile / Suite Styles --- */
-        .suite-header {
-            text-align: center;
-            padding: 60px 20px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 30px;
-        }
-
-        .suite-name {
-            font-family: var(--font-vogue);
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        .suite-bio {
-            max-width: 600px;
-            margin: 0 auto 20px;
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* --- Bottom Concierge Bar --- */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -201,17 +181,8 @@
             z-index: 3000;
         }
 
-        .nav-icon {
-            font-size: 18px;
-            color: var(--black);
-            cursor: pointer;
-            opacity: 0.4;
-            transition: 0.3s;
-        }
-
-        .nav-icon.active {
-            opacity: 1;
-        }
+        .nav-icon { font-size: 18px; opacity: 0.4; cursor: pointer; transition: 0.3s; }
+        .nav-icon.active { opacity: 1; }
 
         #toast {
             position: fixed;
@@ -222,128 +193,185 @@
             color: var(--white);
             padding: 12px 25px;
             font-size: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
             display: none;
             z-index: 4000;
         }
 
-        @media (max-width: 800px) {
-            .main-feed { column-count: 2; padding: 15px; }
-            .suite-name { font-size: 28px; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @media (max-width: 800px) { .main-feed { column-count: 2; } }
     </style>
 </head>
 <body>
 
+    <div id="auth-screen">
+        <div class="hotel-logo" style="margin-bottom: 40px;">The Hotel Closet</div>
+        <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px;">Check-in to your Suite</p>
+        <input type="text" id="username" class="auth-input" placeholder="FULL NAME">
+        <input type="email" id="useremail" class="auth-input" placeholder="EMAIL ADDRESS">
+        <button class="btn-action" style="margin-top: 20px; width: 300px;" onclick="registerUser()">Enter the Lobby</button>
+    </div>
+
+    <div id="gift-card-overlay">
+        <h2 style="font-family: var(--font-vogue); font-weight: 400;">A Welcome Gift</h2>
+        <p style="font-size: 11px; margin-bottom: 40px;">TAP TO REDEEM YOUR CREDITS</p>
+        <div class="gift-card" onclick="redeemCredits()">
+            <div class="card-logo">THE HOTEL CLOSET</div>
+            <div class="card-value">15.00 <span style="font-size: 12px;">CREDITS</span></div>
+            <div class="card-holder" id="card-name-display">GUEST</div>
+        </div>
+    </div>
+
     <header>
         <div class="hotel-logo" onclick="showPage('lobby')">The Hotel Closet</div>
-        <div class="concierge-status">Guest Concierge | <span class="credit-count" id="user-credits">100</span> Credits Available</div>
+        <div class="concierge-status">Guest: <span id="display-name">...</span> | <span class="credit-count" id="user-credits">0</span> Credits</div>
     </header>
 
-    <main id="lobby" class="page active">
-        <div class="main-feed">
-            <div class="closet-card">
-                <span class="tier-indicator" style="color: var(--tier-1)">Tier 1 | Elite Archive</span>
-                <img src="https://images.unsplash.com/photo-1539109132314-347752418b30?auto=format&fit=crop&w=600&q=80">
-                <div class="card-overlay">
-                    <button class="btn-action" onclick="processSwap(20)">Borrow (20 Credits)</button>
-                    <button class="btn-action btn-bid" onclick="openBid()">Make Offer</button>
-                </div>
-                <div class="owner-link" onclick="showPage('suite')">@archiviste_paris</div>
+    <main id="lobby" class="page">
+        <div class="main-feed" id="global-feed">
             </div>
-
-            <div class="closet-card">
-                <span class="tier-indicator">Tier 2 | Boutique Luxury</span>
-                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80">
-                <div class="card-overlay">
-                    <button class="btn-action" onclick="processSwap(10)">Borrow (10 Credits)</button>
-                    <button class="btn-action btn-bid" onclick="openBid()">Make Offer</button>
-                </div>
-                <div class="owner-link" onclick="showPage('suite')">@camilla_collector</div>
-            </div>
-
-            <div class="closet-card">
-                <span class="tier-indicator">Tier 3 | Daily Edit</span>
-                <img src="https://images.unsplash.com/photo-1554568218-0f1715e72254?auto=format&fit=crop&w=600&q=80">
-                <div class="card-overlay">
-                    <button class="btn-action" onclick="processSwap(5)">Borrow (5 Credits)</button>
-                    <button class="btn-action btn-bid" onclick="openBid()">Make Offer</button>
-                </div>
-                <div class="owner-link" onclick="showPage('suite')">@zara_edit</div>
-            </div>
-        </div>
-    </main>
-
-    <main id="suite" class="page">
-        <div class="suite-header">
-            <div class="suite-name">@archiviste_paris</div>
-            <div class="suite-bio">Archiving 90s minimalism. Curated Prada, Jil Sander, and Old Céline. Available for exchange or private acquisition.</div>
-            <button class="btn-action" style="width: auto; padding: 10px 30px;">Follow Suite</button>
-            <button class="btn-action btn-bid" style="width: auto; padding: 10px 30px;" onclick="showToast('Messenger opening...')">Message</button>
-        </div>
-        <div class="main-feed">
-            <div class="closet-card"><img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?auto=format&fit=crop&w=600&q=80"></div>
-            <div class="closet-card"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=80"></div>
-            <div class="closet-card"><img src="https://images.unsplash.com/photo-1576188973526-0e5d742224da?auto=format&fit=crop&w=600&q=80"></div>
-        </div>
     </main>
 
     <main id="vault" class="page">
-        <div class="suite-header">
-            <div class="suite-name">Your Closet Vault</div>
-            <p style="text-transform: uppercase; font-size: 10px; letter-spacing: 2px;">Manage your listings & credits</p>
-            <button class="btn-action" style="width: auto; padding: 10px 30px; margin-top: 20px;" onclick="showToast('Camera access required...')">+ Add New Piece</button>
+        <div style="text-align: center; padding: 40px;">
+            <h2 class="hotel-logo">Your Closet Vault</h2>
+            <button class="btn-action" onclick="showPage('upload-page')">+ Archive New Piece</button>
         </div>
-        <div class="main-feed">
-            <div class="closet-card" style="opacity: 0.6;">
-                <span class="tier-indicator">In Review</span>
-                <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=600&q=80">
+        <div class="main-feed" id="user-closet-feed"></div>
+    </main>
+
+    <main id="upload-page" class="page">
+        <div style="text-align: center; padding: 40px;">
+            <h2 class="hotel-logo">Add to Collection</h2>
+            <div id="upload-preview">
+                <p id="upload-text" style="font-size: 10px; color: #999;">SELECT IMAGE</p>
             </div>
+            <input type="file" id="file-input" hidden accept="image/*">
+            <button class="btn-action" onclick="document.getElementById('file-input').click()">Choose Photo</button>
+            <br><br>
+            <input type="text" id="item-name" class="auth-input" placeholder="ITEM NAME (e.g. Prada 1999 Skirt)">
+            <br>
+            <button class="btn-action" onclick="uploadItem()">Confirm Archive</button>
         </div>
     </main>
 
     <div id="toast">Concierge: Request Processed</div>
 
     <nav class="bottom-nav">
-        <i class="fa-solid fa-hotel nav-icon active" onclick="showPage('lobby', this)"></i>
-        <i class="fa-solid fa-magnifying-glass nav-icon" onclick="showToast('Searching the Hotel...')"></i>
-        <i class="fa-solid fa-bell nav-icon" onclick="showToast('No new notifications')"></i>
+        <i class="fa-solid fa-hotel nav-icon" onclick="showPage('lobby', this)"></i>
+        <i class="fa-solid fa-magnifying-glass nav-icon" onclick="searchFriends()"></i>
+        <i class="fa-solid fa-plus-square nav-icon" onclick="showPage('upload-page', this)"></i>
         <i class="fa-solid fa-user-tie nav-icon" onclick="showPage('vault', this)"></i>
     </nav>
 
     <script>
-        let credits = 100;
+        let userData = {
+            name: "",
+            credits: 0,
+            myItems: [],
+            liked: []
+        };
 
-        // Simple Router
-        function showPage(pageId, navEl) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            // Show target page
-            document.getElementById(pageId).classList.add('active');
+        // 1. REGISTRATION logic
+        function registerUser() {
+            const name = document.getElementById('username').value;
+            if(!name) return alert("Please enter your name");
             
-            // Update Nav Icons
+            userData.name = name;
+            document.getElementById('display-name').innerText = name;
+            document.getElementById('card-name-display').innerText = name;
+            
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('gift-card-overlay').style.display = 'flex';
+        }
+
+        // 2. GIFT CARD logic
+        function redeemCredits() {
+            userData.credits = 15;
+            document.getElementById('user-credits').innerText = userData.credits;
+            document.getElementById('gift-card-overlay').style.display = 'none';
+            showPage('lobby');
+            showToast("15 Credits Added to your Vault");
+            renderFeed();
+        }
+
+        // 3. UPLOAD logic
+        const fileInput = document.getElementById('file-input');
+        fileInput.onchange = e => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onload = () => {
+                document.getElementById('upload-preview').innerHTML = `<img src="${reader.result}">`;
+                userData.tempImg = reader.result;
+            };
+            reader.readAsDataURL(file);
+        };
+
+        function uploadItem() {
+            const name = document.getElementById('item-name').value;
+            if(!name || !userData.tempImg) return alert("Add a name and image");
+
+            const newItem = { id: Date.now(), name: name, img: userData.tempImg, owner: "@"+userData.name.replace(" ", "_").toLowerCase() };
+            userData.myItems.push(newItem);
+            
+            // Reset
+            document.getElementById('item-name').value = "";
+            document.getElementById('upload-preview').innerHTML = `<p style="font-size: 10px; color: #999;">SELECT IMAGE</p>`;
+            
+            showToast("Item Archived in Vault");
+            renderFeed();
+            showPage('vault');
+        }
+
+        // 4. FEED & INTERACTION logic
+        function renderFeed() {
+            const feed = document.getElementById('global-feed');
+            const userFeed = document.getElementById('user-closet-feed');
+            
+            // Hardcoded initial items
+            const initialItems = [
+                { id: 1, name: "Elite Archive", img: "https://images.unsplash.com/photo-1539109132314-347752418b30?w=600", owner: "@archiviste_paris" },
+                { id: 2, name: "Boutique Luxury", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600", owner: "@camilla_collector" }
+            ];
+
+            const allItems = [...initialItems, ...userData.myItems];
+            
+            feed.innerHTML = allItems.map(item => `
+                <div class="closet-card">
+                    <img src="${item.img}">
+                    <div class="card-actions">
+                        <span style="font-size: 10px;">${item.owner}</span>
+                        <div>
+                            <i class="fa-solid fa-heart heart-btn" onclick="toggleHeart(this)"></i>
+                            <i class="fa-solid fa-paper-plane" style="margin-left:10px; font-size:12px;" onclick="showToast('Bidding opened...')"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            userFeed.innerHTML = userData.myItems.map(item => `
+                <div class="closet-card"><img src="${item.img}"></div>
+            `).join('');
+        }
+
+        function toggleHeart(el) {
+            el.classList.toggle('active');
+            if(el.classList.contains('active')) showToast("Saved to Favorites");
+        }
+
+        function searchFriends() {
+            const person = prompt("Search guest name or @suite:");
+            if(person) showToast("Searching suites for " + person);
+        }
+
+        function showPage(pageId, navEl) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
             if(navEl) {
                 document.querySelectorAll('.nav-icon').forEach(i => i.classList.remove('active'));
                 navEl.classList.add('active');
             }
-
             window.scrollTo(0,0);
-        }
-
-        function processSwap(cost) {
-            if(credits >= cost) {
-                credits -= cost;
-                document.getElementById('user-credits').innerText = credits;
-                showToast("Request sent to Suite Owner.");
-            } else {
-                showToast("Front Desk: Insufficient Credits.");
-            }
-        }
-
-        function openBid() {
-            const offer = prompt("Submit your private offer ($):");
-            if(offer) showToast("Offer sent for review.");
         }
 
         function showToast(msg) {
