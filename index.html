@@ -1,279 +1,1410 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE HOTEL CLOSET | Elite Wardrobe Exchange</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Inter:wght@200;300;400&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hotel Closet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #111010;
+  --paper: #FAFAF8;
+  --ivory: #F4F2EE;
+  --gold: #C9A96E;
+  --gold-pale: #F5EDD8;
+  --mist: #E8E4DC;
+  --smoke: #888580;
+  --rule: rgba(17,16,16,0.10);
+}
 
-        :root {
-            --black: #000000;
-            --white: #ffffff;
-            --soft-gray: #f8f8f8;
-            --font-vogue: 'Bodoni Moda', serif;
-            --font-sans: 'Inter', sans-serif;
-        }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            background-color: var(--white);
-            color: var(--black);
-            font-family: var(--font-sans);
-            margin: 0;
-            padding-bottom: 80px;
-            letter-spacing: -0.01em;
-        }
+html { scroll-behavior: smooth; }
 
-        header {
-            background: var(--white);
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 1px solid #f0f0f0;
-            position: sticky;
-            top: 0;
-            z-index: 2000;
-        }
+body {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  background: var(--paper);
+  color: var(--ink);
+  padding-bottom: 72px;
+  min-height: 100vh;
+}
 
-        .hotel-logo {
-            font-family: var(--font-vogue);
-            font-size: 28px;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
+/* ── TYPOGRAPHY ── */
+.serif { font-family: 'Cormorant Garamond', serif; }
+.italic { font-style: italic; }
 
-        .concierge-status {
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #999;
-        }
+/* ── HEADER ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--paper);
+  border-bottom: 0.5px solid var(--rule);
+  padding: 0 24px;
+}
 
-        .credit-count {
-            color: var(--black);
-            font-weight: bold;
-            padding-left: 5px;
-            border-bottom: 1px solid black;
-        }
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 58px;
+}
 
-        /* --- Pinterest style Feed --- */
-        .main-feed {
-            max-width: 1400px;
-            margin: 0 auto;
-            column-count: 3;
-            column-gap: 20px;
-            padding: 30px;
-        }
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
-        .closet-card {
-            break-inside: avoid;
-            margin-bottom: 30px;
-            position: relative;
-            background: var(--soft-gray);
-            overflow: hidden;
-        }
+.credits-chip {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 0.5px solid var(--gold);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
 
-        .closet-card img {
-            width: 100%;
-            display: block;
-            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-        }
+.wordmark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+}
 
-        .closet-card:hover img {
-            transform: scale(1.03);
-        }
+.wordmark small {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 7px;
+  letter-spacing: 4px;
+  color: var(--smoke);
+  text-transform: uppercase;
+  margin-top: 3px;
+  font-style: normal;
+}
 
-        .tier-indicator {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.9);
-            padding: 6px 12px;
-            font-size: 9px;
-            letter-spacing: 2px;
-            font-weight: bold;
-            text-transform: uppercase;
-            z-index: 10;
-        }
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  align-items: center;
+}
 
-        /* --- Hover Overlay --- */
-        .card-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.03);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: 0.3s ease;
-            cursor: pointer;
-        }
+.hbtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--ink);
+  position: relative;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        .closet-card:hover .card-overlay {
-            opacity: 1;
-            background: rgba(255,255,255,0.8);
-        }
+.notif-pip {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+}
 
-        .btn-action {
-            background: var(--black);
-            color: var(--white);
-            border: none;
-            width: 75%;
-            padding: 14px;
-            margin: 6px 0;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-        }
+/* ── BOTTOM NAV ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: var(--paper);
+  border-top: 0.5px solid var(--rule);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 62px;
+  padding: 0 8px;
+}
 
-        .btn-bid {
-            background: transparent;
-            border: 1px solid var(--black);
-            color: var(--black);
-        }
+.nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  position: relative;
+  color: var(--smoke);
+  transition: color 0.2s;
+}
 
-        .owner-info {
-            padding: 15px 0;
-            font-family: var(--font-vogue);
-            font-style: italic;
-            font-size: 15px;
-        }
+.nav-btn.active { color: var(--ink); }
 
-        /* --- Bottom Concierge Bar --- */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: var(--white);
-            display: flex;
-            justify-content: space-around;
-            padding: 25px 0;
-            border-top: 1px solid #f0f0f0;
-            z-index: 2000;
-        }
+.nav-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.2; }
 
-        .nav-icon {
-            font-size: 18px;
-            color: var(--black);
-            cursor: pointer;
-            opacity: 0.7;
-            transition: 0.3s;
-        }
+.nav-label {
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
 
-        .nav-icon:hover {
-            opacity: 1;
-        }
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: block; }
 
-        #toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--black);
-            color: var(--white);
-            padding: 12px 30px;
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            display: none;
-            z-index: 3000;
-        }
+/* ── FEED ── */
+.feed-header {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 24px 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 0.5px solid var(--rule);
+}
 
-        @media (max-width: 800px) {
-            .main-feed { column-count: 2; }
-        }
-    </style>
+.feed-eyebrow {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 4px;
+}
+
+.feed-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+  font-style: italic;
+}
+
+.tier-filters {
+  display: flex;
+  gap: 6px;
+}
+
+.tf {
+  padding: 5px 12px;
+  border: 0.5px solid var(--mist);
+  border-radius: 20px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: white;
+  color: var(--smoke);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+}
+
+.tf.active {
+  background: var(--ink);
+  color: var(--gold);
+  border-color: var(--ink);
+}
+
+/* ── MASONRY FEED GRID ── */
+.masonry-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  columns: 3;
+  column-gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .masonry-wrap { columns: 2; }
+}
+
+.feed-card {
+  break-inside: avoid;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--ivory);
+}
+
+.feed-card img {
+  width: 100%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+.feed-card:hover img { transform: scale(1.04); }
+
+.feed-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(17,16,16,0);
+  transition: background 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+}
+
+.feed-card:hover .feed-card-overlay {
+  background: rgba(17,16,16,0.45);
+}
+
+.feed-card-meta {
+  transform: translateY(8px);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.feed-card:hover .feed-card-meta {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.feed-card-user {
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.feed-card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: white;
+  font-style: italic;
+}
+
+.feed-card-action {
+  margin-top: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+.fca-btn {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 0.5px solid rgba(255,255,255,0.6);
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  transition: all 0.2s;
+}
+
+.fca-btn:hover { background: white; color: var(--ink); }
+.fca-btn.gold { background: var(--gold); border-color: var(--gold); color: white; }
+.fca-btn.gold:hover { background: white; color: var(--ink); }
+
+.tier-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  font-family: 'Jost', sans-serif;
+}
+
+.tier-tag.t1 { background: rgba(255,255,255,0.92); color: #3B5E3B; }
+.tier-tag.t2 { background: rgba(255,255,255,0.92); color: #7A4F1A; }
+.tier-tag.t3 { background: rgba(17,16,16,0.85); color: var(--gold); }
+
+.heart-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255,255,255,0.88);
+  border: none;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 13px;
+  transition: transform 0.2s;
+}
+
+.heart-btn:hover { transform: scale(1.15); }
+.heart-btn.liked { color: #C0392B; }
+
+/* ── PROFILE SCREEN ── */
+.profile-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+}
+
+.profile-banner {
+  height: 180px;
+  background: var(--ink);
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 24px 20px;
+  margin: 0 -24px;
+}
+
+.profile-banner::after {
+  content: 'The Hotel Closet';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(201,169,110,0.3);
+  white-space: nowrap;
+}
+
+.profile-avi {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid var(--paper);
+  object-fit: cover;
+  position: absolute;
+  bottom: -40px;
+  left: 24px;
+  background: #3D3520;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  overflow: hidden;
+}
+
+.profile-body {
+  padding: 52px 0 0;
+}
+
+.profile-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.profile-handle {
+  font-size: 11px;
+  color: var(--smoke);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.profile-bio {
+  font-size: 12px;
+  color: var(--smoke);
+  margin-top: 10px;
+  line-height: 1.7;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 0;
+  margin: 20px 0;
+  border-top: 0.5px solid var(--rule);
+  border-bottom: 0.5px solid var(--rule);
+  padding: 14px 0;
+}
+
+.pstat {
+  flex: 1;
+  text-align: center;
+}
+
+.pstat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 300;
+  display: block;
+}
+
+.pstat-label {
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-top: 2px;
+  display: block;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.pa-btn {
+  flex: 1;
+  padding: 11px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  border: 0.5px solid var(--ink);
+  background: var(--ink);
+  color: var(--gold);
+  transition: all 0.2s;
+}
+
+.pa-btn.outline {
+  background: transparent;
+  color: var(--ink);
+}
+
+.pa-btn:hover { opacity: 0.8; }
+
+/* Closet friends shelf */
+.shelf-label {
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 12px;
+}
+
+.friends-shelf {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  scrollbar-width: none;
+}
+
+.friends-shelf::-webkit-scrollbar { display: none; }
+
+.friend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.friend-avi {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  border: 1.5px solid var(--mist);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.friend-item:hover .friend-avi { border-color: var(--gold); }
+
+.friend-name {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--smoke);
+  text-align: center;
+}
+
+/* Profile closet grid */
+.closet-section-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.tier-tab-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.ctab {
+  padding: 4px 12px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 0.5px solid var(--mist);
+  background: transparent;
+  color: var(--smoke);
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.ctab.active { background: var(--ink); color: var(--gold); border-color: var(--ink); }
+
+.closet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+.ci {
+  aspect-ratio: 1;
+  background: var(--ivory);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.ci img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s;
+}
+
+.ci:hover img { transform: scale(1.07); }
+
+.ci-tier {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ── NOTIFICATIONS ── */
+.notif-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.screen-header {
+  padding: 28px 0 20px;
+  border-bottom: 0.5px solid var(--rule);
+  margin-bottom: 0;
+}
+
+.screen-eyebrow {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 4px;
+}
+
+.screen-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.notif-list { }
+
+.notif-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 0;
+  border-bottom: 0.5px solid var(--rule);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.notif-item.unread { background: #FDFCF9; margin: 0 -24px; padding: 18px 24px; }
+
+.notif-avi {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  border: 0.5px solid var(--mist);
+}
+
+.notif-body { flex: 1; }
+
+.notif-name {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+
+.notif-msg {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  color: var(--smoke);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+.notif-time {
+  font-size: 9px;
+  color: var(--mist);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+.notif-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.na-btn {
+  padding: 6px 14px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  border: 0.5px solid var(--ink);
+  background: var(--ink);
+  color: var(--gold);
+  transition: all 0.2s;
+}
+
+.na-btn.soft {
+  background: transparent;
+  color: var(--smoke);
+  border-color: var(--mist);
+}
+
+.unread-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* ── CREDITS ── */
+.credits-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.credits-hero {
+  background: var(--ink);
+  margin: 0 -24px;
+  padding: 36px 32px 28px;
+  text-align: center;
+}
+
+.credits-hero-label {
+  font-size: 8px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(201,169,110,0.6);
+  margin-bottom: 8px;
+}
+
+.credits-hero-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.credits-hero-sub {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-top: 6px;
+}
+
+.tier-cost-row {
+  display: flex;
+  gap: 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  margin: 20px -32px 0;
+  padding: 0 32px;
+}
+
+.tc {
+  flex: 1;
+  text-align: center;
+  padding: 14px 4px;
+  border-right: 0.5px solid rgba(255,255,255,0.08);
+}
+
+.tc:last-child { border-right: none; }
+.tc-name { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: rgba(201,169,110,0.5); }
+.tc-amt { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--gold); margin: 4px 0 2px; }
+.tc-note { font-size: 9px; color: rgba(255,255,255,0.25); }
+
+.plans-section { padding: 28px 0; }
+
+.plans-label {
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 16px;
+}
+
+.plan-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 0;
+  border-bottom: 0.5px solid var(--rule);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.plan-row:hover { background: var(--ivory); margin: 0 -24px; padding: 18px 24px; }
+.plan-row:last-child { border-bottom: none; }
+
+.plan-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.plan-info { flex: 1; }
+
+.plan-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-style: italic;
+}
+
+.plan-credits {
+  font-size: 10px;
+  color: var(--smoke);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.plan-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.plan-arrow { color: var(--smoke); font-size: 14px; }
+
+.featured-plan { position: relative; }
+
+.featured-plan::before {
+  content: 'Most Popular';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.activity-section { padding: 0 0 24px; }
+
+.act-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 0.5px solid var(--rule);
+}
+
+.act-icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  background: var(--ivory);
+}
+
+.act-info { flex: 1; }
+.act-label { font-size: 12px; color: var(--ink); }
+.act-date { font-size: 10px; color: var(--smoke); margin-top: 1px; }
+.act-pts { font-family: 'Cormorant Garamond', serif; font-size: 16px; }
+.act-earn { color: #3B5E3B; }
+.act-spend { color: #8B2118; }
+
+/* ── CLOSET FRIENDS ── */
+.friends-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.friend-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 0.5px solid var(--rule);
+  cursor: pointer;
+}
+
+.friend-card-avi {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  border: 0.5px solid var(--mist);
+}
+
+.friend-card-info { flex: 1; }
+
+.friend-card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  font-style: italic;
+}
+
+.friend-card-handle {
+  font-size: 10px;
+  color: var(--smoke);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.friend-card-tier {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.ftier1 { background: #E8F4E8; color: #2D6A2D; }
+.ftier2 { background: #FFF3E0; color: #7A4F1A; }
+.ftier3 { background: var(--ink); color: var(--gold); }
+
+.friend-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 8px;
+}
+
+.fmg-item {
+  aspect-ratio: 1;
+  background: var(--ivory);
+  overflow: hidden;
+}
+
+.fmg-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+
+/* ── MODAL ── */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(17,16,16,0.55);
+  z-index: 500;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.modal-bg.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--paper);
+  width: 100%;
+  max-width: 540px;
+  max-height: 88vh;
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+}
+
+.modal-bg.open .modal { transform: translateY(0); }
+
+.modal-drag { width: 32px; height: 2px; background: var(--mist); margin: 14px auto 0; }
+
+.modal-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
+  background: var(--ivory);
+}
+
+.modal-body { padding: 20px 22px 24px; }
+
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.modal-brand {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-top: 4px;
+}
+
+.modal-tier-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-top: 0.5px solid var(--rule);
+  border-bottom: 0.5px solid var(--rule);
+  margin: 14px 0;
+}
+
+.modal-tier-label { font-size: 11px; color: var(--smoke); }
+.modal-tier-cost { font-family: 'Cormorant Garamond', serif; font-size: 16px; }
+
+.modal-owner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.modal-owner-avi {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+}
+
+.modal-owner-info { font-size: 11px; color: var(--smoke); }
+.modal-owner-info strong { color: var(--ink); font-weight: 400; }
+
+.modal-actions { display: flex; gap: 8px; }
+
+.ma-btn {
+  flex: 2;
+  padding: 13px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  background: var(--ink);
+  color: var(--gold);
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.ma-btn:hover { opacity: 0.85; }
+
+.ma-btn.outline {
+  flex: 1;
+  background: transparent;
+  color: var(--ink);
+  border: 0.5px solid var(--ink);
+}
+
+.bid-section {
+  margin-top: 14px;
+  border-top: 0.5px solid var(--rule);
+  padding-top: 14px;
+  display: none;
+}
+
+.bid-section.open { display: block; }
+
+.bid-label {
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--smoke);
+  margin-bottom: 10px;
+}
+
+.bid-row { display: flex; gap: 8px; }
+
+.bid-input {
+  flex: 1;
+  padding: 11px 14px;
+  border: 0.5px solid var(--mist);
+  background: white;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: var(--ink);
+  outline: none;
+}
+
+.bid-input:focus { border-color: var(--ink); }
+
+.bid-send {
+  padding: 11px 18px;
+  background: var(--gold);
+  border: none;
+  color: white;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 82px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--ink);
+  color: var(--gold);
+  padding: 10px 22px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 1000;
+  pointer-events: none;
+  font-family: 'Jost', sans-serif;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── SEARCH SCREEN ── */
+.search-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.search-bar-wrap {
+  padding: 20px 0 14px;
+  border-bottom: 0.5px solid var(--rule);
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 0.5px solid var(--ink);
+  padding-bottom: 8px;
+}
+
+.search-field input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--ink);
+  outline: none;
+}
+
+.search-field input::placeholder { color: var(--mist); }
+
+.search-icon { font-size: 14px; color: var(--smoke); }
+
+.suggested-label {
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--smoke);
+  padding: 18px 0 12px;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 0.5px solid var(--rule);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.user-row:hover { padding-left: 4px; }
+
+.user-row-avi {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+
+.user-row-info { flex: 1; }
+.user-row-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-style: italic; }
+.user-row-handle { font-size: 10px; color: var(--smoke); letter-spacing: 1px; margin-top: 2px; }
+.user-row-arrow { font-size: 12px; color: var(--mist); }
+
+/* scrollbar hidden globally */
+* { scrollbar-width: none; }
+*::-webkit-scrollbar { display: none; }
+</style>
 </head>
 <body>
 
-    <header>
-        <div class="hotel-logo">The Hotel Closet</div>
-        <div class="concierge-status">Guest Concierge | <span class="credit-count" id="user-credits">100</span> Credits Available</div>
-    </header>
+<header>
+  <div class="header-inner">
+    <div class="header-left">
+      <span class="credits-chip" id="headerCredits">15 credits</span>
+    </div>
+    <div class="wordmark serif">
+      The Hotel Closet
+      <small>by invitation only</small>
+    </div>
+    <div class="header-right">
+      <button class="hbtn" onclick="showScreen('notifs')" title="Notifications">
+        <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="notif-pip"></span>
+      </button>
+      <button class="hbtn" onclick="showScreen('profile')" title="My Closet">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
 
-    <main class="main-feed">
-        <div class="closet-card">
-            <span class="tier-indicator">Tier 1 | Elite Designer</span>
-            <img src="https://images.unsplash.com/photo-1539109132314-347752418b30?auto=format&fit=crop&w=600&q=80">
-            <div class="card-overlay">
-                <button class="btn-action" onclick="swap(1)">Borrow (20 Credits)</button>
-                <button class="btn-action btn-bid" onclick="bid()">Place Bid</button>
-            </div>
-            <div class="owner-info">@archiviste_paris</div>
-        </div>
+<!-- ── FEED ── -->
+<div class="screen active" id="screen-feed">
+  <div class="feed-header">
+    <div>
+      <div class="feed-eyebrow">Today's arrivals</div>
+      <div class="feed-title serif italic">The Suite</div>
+    </div>
+    <div class="tier-filters">
+      <button class="tf active" onclick="filterFeed(this,'all')">All</button>
+      <button class="tf" onclick="filterFeed(this,'1')" style="color:#3B5E3B;border-color:#C8E6C9;">I</button>
+      <button class="tf" onclick="filterFeed(this,'2')" onclick="filterFeed(this,'2')" style="color:#7A4F1A;border-color:#FFE0B2;">II</button>
+      <button class="tf" onclick="filterFeed(this,'3')" style="color:#C9A96E;border-color:#E8D5A0;">III</button>
+    </div>
+  </div>
+  <div class="masonry-wrap" id="feedGrid"></div>
+</div>
 
-        <div class="closet-card">
-            <span class="tier-indicator">Tier 2 | Boutique Luxury</span>
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80">
-            <div class="card-overlay">
-                <button class="btn-action" onclick="swap(2)">Borrow (10 Credits)</button>
-                <button class="btn-action btn-bid" onclick="bid()">Place Bid</button>
-            </div>
-            <div class="owner-info">@camilla_collector</div>
-        </div>
+<!-- ── SEARCH ── -->
+<div class="screen" id="screen-search">
+  <div class="search-wrap">
+    <div class="search-bar-wrap">
+      <div class="screen-eyebrow" style="padding-top:24px;">Discover</div>
+      <div class="feed-title serif italic" style="margin-bottom:14px;">Closets</div>
+      <div class="search-field">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="Search by @handle or name…" id="searchInput" oninput="handleSearch(this.value)">
+      </div>
+    </div>
+    <div class="suggested-label">Suggested suites</div>
+    <div id="userResults"></div>
+  </div>
+</div>
 
-        <div class="closet-card">
-            <span class="tier-indicator">Tier 3 | Fast Fashion</span>
-            <img src="https://images.unsplash.com/photo-1554568218-0f1715e72254?auto=format&fit=crop&w=600&q=80">
-            <div class="card-overlay">
-                <button class="btn-action" onclick="swap(3)">Borrow (5 Credits)</button>
-                <button class="btn-action btn-bid" onclick="bid()">Place Bid</button>
-            </div>
-            <div class="owner-info">@zara_edit</div>
-        </div>
-        
-        <div class="closet-card">
-            <span class="tier-indicator">Tier 1 | Elite Designer</span>
-            <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c33?auto=format&fit=crop&w=600&q=80">
-            <div class="card-overlay">
-                <button class="btn-action" onclick="swap(1)">Borrow (20 Credits)</button>
-            </div>
-            <div class="owner-info">@vogue_vintage</div>
-        </div>
-    </main>
+<!-- ── NOTIFICATIONS ── -->
+<div class="screen" id="screen-notifs">
+  <div class="notif-wrap">
+    <div class="screen-header">
+      <div class="screen-eyebrow">Concierge</div>
+      <div class="screen-title serif italic">Requests & Offers</div>
+    </div>
+    <div class="notif-list" id="notifList"></div>
+  </div>
+</div>
 
-    <div id="toast">Request processed by concierge.</div>
+<!-- ── FRIENDS ── -->
+<div class="screen" id="screen-friends">
+  <div class="friends-wrap">
+    <div class="screen-header">
+      <div class="screen-eyebrow">Your circle</div>
+      <div class="screen-title serif italic">Closet Friends</div>
+    </div>
+    <div id="friendsList"></div>
+  </div>
+</div>
 
-    <nav class="bottom-nav">
-        <i class="fa-solid fa-hotel nav-icon"></i>
-        <i class="fa-solid fa-magnifying-glass nav-icon"></i>
-        <i class="fa-solid fa-bell nav-icon"></i>
-        <i class="fa-solid fa-user-tie nav-icon"></i>
-    </nav>
+<!-- ── PROFILE ── -->
+<div class="screen" id="screen-profile">
+  <div class="profile-wrap">
+    <div class="profile-banner">
+      <div class="profile-avi" style="font-size:32px;">✦</div>
+    </div>
+    <div class="profile-body">
+      <div class="profile-name serif italic">Isabelle Laurent</div>
+      <div class="profile-handle">@isabelle.l</div>
+      <div class="profile-bio serif italic">"I dress for the hotel lobby I might walk through."<br>Dior archivist. Slow fashion devotee.</div>
+      <div class="profile-stats">
+        <div class="pstat"><span class="pstat-num serif">18</span><span class="pstat-label">Items</span></div>
+        <div class="pstat"><span class="pstat-num serif">12</span><span class="pstat-label">Swaps</span></div>
+        <div class="pstat"><span class="pstat-num serif">★ 4.9</span><span class="pstat-label">Rating</span></div>
+        <div class="pstat"><span class="pstat-num serif" id="profileCredits">15</span><span class="pstat-label">Credits</span></div>
+      </div>
+      <div class="profile-actions">
+        <button class="pa-btn" onclick="showScreen('credits')">Top Up Credits</button>
+        <button class="pa-btn outline" onclick="showToast('Settings coming soon')">Settings</button>
+      </div>
 
-    <script>
-        let credits = 100;
+      <div class="shelf-label">Closet Friends</div>
+      <div class="friends-shelf" id="profileFriendsShelf"></div>
 
-        function swap(tier) {
-            let cost = 0;
-            if(tier === 1) cost = 20;
-            if(tier === 2) cost = 10;
-            if(tier === 3) cost = 5;
+      <div class="closet-section-label">
+        <div class="shelf-label" style="margin:0;">My Wardrobe</div>
+      </div>
+      <div class="tier-tab-row">
+        <button class="ctab active" onclick="filterProfile(this,'all')">All</button>
+        <button class="ctab" onclick="filterProfile(this,1)">Tier I</button>
+        <button class="ctab" onclick="filterProfile(this,2)">Tier II</button>
+        <button class="ctab" onclick="filterProfile(this,3)">Tier III</button>
+      </div>
+      <div class="closet-grid" id="myClosetGrid"></div>
+    </div>
+  </div>
+</div>
 
-            if(credits >= cost) {
-                credits -= cost;
-                document.getElementById('user-credits').innerText = credits;
-                showToast("Request sent to the suite owner.");
-            } else {
-                showToast("Front Desk: Insufficient credits.");
-            }
-        }
+<!-- ── CREDITS ── -->
+<div class="screen" id="screen-credits">
+  <div class="credits-wrap">
+    <div class="credits-hero">
+      <div class="credits-hero-label">Suite Balance</div>
+      <div class="credits-hero-num serif" id="bigCredits">15</div>
+      <div class="credits-hero-sub">Credits Available</div>
+      <div class="tier-cost-row">
+        <div class="tc"><div class="tc-name">Tier I</div><div class="tc-amt serif">1</div><div class="tc-note">credit</div></div>
+        <div class="tc"><div class="tc-name">Tier II</div><div class="tc-amt serif">3</div><div class="tc-note">credits</div></div>
+        <div class="tc"><div class="tc-name">Tier III</div><div class="tc-amt serif">5</div><div class="tc-note">credits</div></div>
+      </div>
+    </div>
 
-        function bid() {
-            prompt("Submit your private offer to the owner ($):");
-            showToast("Bid sent for review.");
-        }
+    <div class="plans-section">
+      <div class="plans-label">Top up your wardrobe</div>
+      <div class="plan-row" onclick="buyPlan(50,24.99,this)">
+        <div class="plan-icon" style="font-size:16px;">⚿</div>
+        <div class="plan-info">
+          <div class="plan-name serif italic">The Weekender</div>
+          <div class="plan-credits">50 credits</div>
+        </div>
+        <div class="plan-price serif">$24.99</div>
+        <div class="plan-arrow">›</div>
+      </div>
+      <div class="plan-row featured-plan" onclick="buyPlan(100,49.99,this)">
+        <div class="plan-icon" style="font-size:16px;">⚿⚿</div>
+        <div class="plan-info">
+          <div class="plan-name serif italic">The Residence</div>
+          <div class="plan-credits">100 credits</div>
+        </div>
+        <div class="plan-price serif" style="margin-right:80px;">$49.99</div>
+        <div class="plan-arrow">›</div>
+      </div>
+      <div class="plan-row" onclick="buyPlan(9999,199.99,this)">
+        <div class="plan-icon" style="font-size:16px;">∞</div>
+        <div class="plan-info">
+          <div class="plan-name serif italic">The Penthouse</div>
+          <div class="plan-credits">Unlimited · monthly</div>
+        </div>
+        <div class="plan-price serif">$199.99</div>
+        <div class="plan-arrow">›</div>
+      </div>
+    </div>
 
-        function showToast(msg) {
-            const t = document.getElementById('toast');
-            t.innerText = msg;
-            t.style.display = 'block';
-            setTimeout(() => { t.style.display = 'none'; }, 3000);
-        }
-    </script>
-</body>
-</html>
+    <div class="plans-label">Recent activity</div>
+    <div class="activity-section" id="activityLog"></div>
+  </div>
+</div>
+
+<!-- ── BOTTOM NAV ── -->
+<nav class="bottom-nav">
+  <button class="nav-btn active" id="nav-feed" onclick="showScreen('feed')">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    <span class="nav-label">Suite</span>
+  </button>
+  <button class="nav-btn" id="nav-search" onclick="showScreen('search')">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+    <span class="nav-label">Closets</span>
+  </button>
+  <button class="nav-btn" id="nav-notifs" onclick="showScreen('notifs')">
+    <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    <span class="nav-label">Requests</span>
+    <span class="notif-pip" style="top:4px;right:12px;"></span>
+  </button>
+  <button class="nav-btn" id="nav-friends" onclick="showScreen('friends')">
+    <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="18" cy="9" r="2.5"/><path d="M22 20c0-2.8-1.8-5-4-5.5"/></svg>
+    <span class="nav-label">Friends</span>
+  </button>
+  <button class="nav-btn" id="nav-profile" onclick="showScreen('profile')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <span class="nav-label">My Closet</span>
+  </button>
+</nav>
+
+<!-- ── ITEM MODAL ── -->
+<div class="modal-bg" id="itemModal" onclick="maybeCloseModal(event)">
+  <div class="modal" id="modalContent">
+    <div class="modal-drag"></div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── DATA ── */
+let credits = 15;
+
+const USERS = [
+  {handle:'elodie.m', name:'Elodie Montpensier', emoji:'✦', items:14, swaps:9, bio:'Dior archivist. Transient by nature.', tier:3},
+  {handle:'nova.s', name:'Nova Sinclair', emoji:'◈', items:8, swaps:5, bio:'Camilla & silk. Always mid-week checkout.', tier:2},
+  {handle:'elle.r', name:'Elle Rousseau', emoji:'◇', items:16, swaps:12, bio:'Paris-trained eye. Slow fashion only.', tier:3},
+  {handle:'mia.c', name:'Mia Chen', emoji:'○', items:6, swaps:3, bio:'Kookai obsessive. Ground floor suite.', tier:1},
+  {handle:'luna.v', name:'Luna Vasquez', emoji:'◉', items:20, swaps:15, bio:'McQueen or nothin
