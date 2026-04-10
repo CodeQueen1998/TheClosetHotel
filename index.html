@@ -12,9 +12,8 @@
             --black: #121212;
             --white: #ffffff;
             --soft-blush: #fff9f9;
-            --tier-1: #d4af37; /* Gold */
-            --tier-2: #a8a8a8; /* Silver */
-            --tier-3: #cd7f32; /* Bronze */
+            --tier-gold: #C5A059;
+            --tier-silver: #A8A8A8;
             --font-vogue: 'Bodoni Moda', serif;
             --font-sans: 'Inter', sans-serif;
         }
@@ -24,286 +23,226 @@
             color: var(--black);
             font-family: var(--font-sans);
             margin: 0;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
         }
 
-        /* --- UI Components --- */
-        .page { display: none; animation: fadeIn 0.4s ease; padding: 20px; max-width: 1200px; margin: 0 auto; }
-        .page.active { display: block; }
-
+        /* --- Elegant Header --- */
         header {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid #f2f2f2;
             position: sticky;
             top: 0;
             background: white;
             z-index: 1000;
         }
 
-        .logo { font-family: var(--font-vogue); font-size: 22px; letter-spacing: 2px; }
-
-        /* --- Tier Badges --- */
-        .tier-badge {
-            font-size: 8px;
-            padding: 2px 8px;
-            border-radius: 10px;
+        .hotel-brand {
+            font-family: var(--font-vogue);
+            font-size: 28px;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            margin: 0;
+        }
+
+        .section-title {
+            font-size: 10px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #999;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        /* --- The Promenade Feed --- */
+        .page { display: none; animation: fadeIn 0.6s ease; }
+        .page.active { display: block; }
+
+        .promenade-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            column-count: 2;
+            column-gap: 20px;
+        }
+
+        @media (min-width: 768px) { .promenade-container { column-count: 3; } }
+
+        .wardrobe-piece {
+            break-inside: avoid;
+            margin-bottom: 30px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .wardrobe-piece img {
+            width: 100%;
+            border-radius: 2px;
+            display: block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+        }
+
+        /* --- Room Key (Tier Badges) --- */
+        .room-key {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 9px;
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(5px);
+            border: 1px solid #eee;
             letter-spacing: 1px;
             font-weight: 600;
-            display: inline-block;
-            margin-bottom: 5px;
+            text-transform: uppercase;
         }
-        .t1 { background: var(--tier-1); color: white; }
-        .t2 { background: var(--tier-2); color: white; }
-        .t3 { background: var(--tier-3); color: white; }
+        .key-t1 { border-left: 3px solid var(--tier-gold); }
+        .key-t2 { border-left: 3px solid var(--tier-silver); }
 
-        /* --- The Promenade (Pinterest Style) --- */
-        .promenade-grid {
-            column-count: 2;
-            column-gap: 15px;
-        }
-        @media (min-width: 768px) { .promenade-grid { column-count: 3; } }
-
-        .wardrobe-item {
-            break-inside: avoid;
-            margin-bottom: 20px;
-            position: relative;
+        .piece-info {
+            padding: 12px 0;
+            border-bottom: 1px solid #f9f9f9;
         }
 
-        .wardrobe-item img {
-            width: 100%;
-            border-radius: 4px;
-            display: block;
+        .piece-name {
+            font-family: var(--font-vogue);
+            font-size: 16px;
+            margin-bottom: 4px;
         }
 
-        /* --- Auth & Forms --- */
-        .form-container {
-            max-width: 350px;
-            margin: 100px auto;
+        .resident-handle {
+            font-size: 10px;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        /* --- Auth Overlay --- */
+        #auth-screen {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 5000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
 
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
+        .auth-input {
             border: none;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #eee;
+            padding: 15px;
+            width: 300px;
+            margin-bottom: 10px;
             font-family: var(--font-sans);
             outline: none;
+            text-align: center;
         }
 
-        .btn-gold {
-            background: var(--black);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            width: 100%;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 10px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        /* --- Navigation --- */
-        .bottom-nav {
+        /* --- Bottom Concierge Nav --- */
+        .concierge-nav {
             position: fixed;
             bottom: 0;
             width: 100%;
             background: white;
             display: flex;
             justify-content: space-around;
-            padding: 15px 0;
+            padding: 20px 0;
             border-top: 1px solid #eee;
+            z-index: 2000;
         }
 
-        .nav-icon { font-size: 20px; color: #ccc; cursor: pointer; position: relative; }
-        .nav-icon.active { color: var(--black); }
-        .notif-dot {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: 8px;
-            height: 8px;
-            background: #ff4757;
-            border-radius: 50%;
-            display: none;
-        }
+        .nav-item { font-size: 18px; color: #ddd; cursor: pointer; transition: 0.3s; }
+        .nav-item.active { color: var(--black); }
 
-        /* --- Rules Overlay --- */
-        .rules-note {
-            font-size: 10px;
-            color: #888;
-            font-style: italic;
-            margin-top: 10px;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div id="auth-page" class="page active">
-        <div class="form-container">
-            <h1 class="logo">The Closet Hotel</h1>
-            <p style="font-size: 10px; letter-spacing: 2px; color: #999;">RESIDENCY APPLICATION</p>
-            <input type="text" id="reg-user" placeholder="USERNAME">
-            <input type="email" id="reg-email" placeholder="EMAIL ADDRESS">
-            <input type="password" id="reg-pass" placeholder="PASSWORD">
-            <button class="btn-gold" onclick="handleAuth()">Check-In</button>
+    <div id="auth-screen">
+        <h1 class="hotel-brand">The Closet Hotel</h1>
+        <p class="section-title">Check-in to your Suite</p>
+        <div style="margin-top: 40px;">
+            <input type="text" id="username" class="auth-input" placeholder="USERNAME"><br>
+            <input type="email" id="useremail" class="auth-input" placeholder="EMAIL ADDRESS"><br>
+            <input type="password" id="userpass" class="auth-input" placeholder="PASSWORD"><br>
+            <button onclick="handleCheckIn()" style="background: black; color: white; border: none; padding: 15px 80px; margin-top: 20px; font-size: 10px; letter-spacing: 2px; cursor: pointer;">ENTER THE LOBBY</button>
         </div>
     </div>
 
-    <header id="main-header" style="display: none;">
-        <div class="logo">TCH</div>
-        <div class="nav-icon" onclick="showPage('notifications')">
-            <i class="fa-solid fa-bell"></i>
-            <div id="notif-dot" class="notif-dot"></div>
-        </div>
+    <header id="main-header" style="display:none;">
+        <h1 class="hotel-brand">The Closet Hotel</h1>
+        <div id="page-title" class="section-title">The Promenade</div>
     </header>
 
     <main id="promenade" class="page">
-        <div class="promenade-grid" id="global-items">
+        <div class="promenade-container" id="feed-items">
             </div>
     </main>
 
-    <main id="notifications" class="page">
-        <h2 class="logo">The Silver Platter</h2>
-        <div id="notif-list">
-            <p style="font-size: 12px; color: #888; border-bottom: 1px solid #eee; padding: 15px 0;">
-                <b>@claire_archive</b> has requested to borrow your "Prada Silk Mini". 
-                <br><button onclick="showPage('parlour')" style="margin-top:5px; font-size:9px;">VIEW EXCHANGE OPTIONS</button>
-            </p>
+    <main id="checkin-piece" class="page">
+        <div style="text-align: center; padding: 60px 20px;">
+            <p class="section-title">New Archive</p>
+            <div style="width: 100%; max-width: 400px; height: 500px; background: #fafafa; border: 1px solid #eee; margin: 20px auto; display: flex; align-items: center; justify-content: center;">
+                <p style="font-size: 10px; color: #ccc;">LIGHT BACKDROP ONLY</p>
+            </div>
+            <button style="border: 1px solid black; background: none; padding: 10px 40px; font-size: 10px;">UPLOAD PORTRAIT</button>
         </div>
     </main>
 
-    <main id="parlour" class="page">
-        <h2 class="logo">The Parlour</h2>
-        <div style="background: var(--soft-blush); padding: 20px; border-radius: 8px;">
-            <p style="font-size: 11px;"><b>System:</b> In order to borrow a Tier 1 item, you must agree to a Tier 1 security deposit or a reciprocal Tier 1 loan.</p>
-            <div style="height: 200px; border-bottom: 1px solid #ddd; margin-bottom: 10px;"></div>
-            <input type="text" placeholder="Send a message to Resident...">
-        </div>
-    </main>
-
-    <main id="upload" class="page">
-        <h2 class="logo">New Check-In</h2>
-        <div style="border: 1px dashed #ccc; padding: 40px; text-align: center; background: #fafafa;" onclick="document.getElementById('file-up').click()">
-            <i class="fa-solid fa-camera" style="font-size: 30px; color: #ddd;"></i>
-            <p class="rules-note">RULES: High-resolution, light backdrop only.</p>
-        </div>
-        <input type="file" id="file-up" hidden>
-        <input type="text" id="upload-name" placeholder="ITEM NAME">
-        <select id="tier-select" style="width: 100%; padding: 12px; margin: 10px 0;">
-            <option value="t1">Tier 1: Archival / High-End Luxury</option>
-            <option value="t2">Tier 2: Contemporary / Designer</option>
-            <option value="t3">Tier 3: Premium Basics</option>
-        </select>
-        <button class="btn-gold" onclick="submitItem()">Archive Piece</button>
-    </main>
-
-    <main id="suite" class="page">
-        <div style="text-align: center; padding-bottom: 30px;">
-            <h2 id="suite-name" class="logo">Resident Suite</h2>
-            <button class="btn-gold" style="width: auto; padding: 8px 20px;" onclick="generateShipping()">Apply for Shipping Code</button>
-        </div>
-        <div class="promenade-grid" id="my-items"></div>
-    </main>
-
-    <nav class="bottom-nav" id="footer-nav" style="display: none;">
-        <i class="fa-solid fa-house nav-icon active" onclick="showPage('promenade', this)"></i>
-        <i class="fa-solid fa-magnifying-glass nav-icon" onclick="showPage('promenade', this)"></i>
-        <i class="fa-solid fa-plus nav-icon" onclick="showPage('upload', this)"></i>
-        <i class="fa-solid fa-message nav-icon" onclick="showPage('parlour', this)"></i>
-        <i class="fa-solid fa-user nav-icon" onclick="showPage('suite', this)"></i>
+    <nav class="concierge-nav" id="main-nav" style="display:none;">
+        <i class="fa-solid fa-hotel nav-item active" onclick="showSection('promenade', this)"></i>
+        <i class="fa-solid fa-magnifying-glass nav-item"></i>
+        <i class="fa-solid fa-plus nav-item" onclick="showSection('checkin-piece', this)"></i>
+        <i class="fa-solid fa-paper-plane nav-item"></i>
+        <i class="fa-solid fa-user-tie nav-item"></i>
     </nav>
 
     <script>
-        let currentUser = null;
-        let database = [
-            { id: 101, name: "Prada 1999 Skirt", tier: "t1", img: "https://images.unsplash.com/photo-1585144860106-998ca0f2922a?w=600", owner: "@claire_archive" },
-            { id: 102, name: "Ganni Mesh Top", tier: "t2", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600", owner: "@sophie_london" }
+        const wardrobeDatabase = [
+            { name: "Silk Slip Archive", tier: "T1", resident: "@claire_beau", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=800" },
+            { name: "Vintage Wool Blazer", tier: "T1", resident: "@archival_girl", img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800" },
+            { name: "Minimalist Linen Set", tier: "T2", resident: "@sophie_minimal", img: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800" },
+            { name: "Structured Mini Dress", tier: "T1", resident: "@couture_resident", img: "https://images.unsplash.com/photo-1539109132314-347752418b30?w=800" }
         ];
 
-        // --- Auth Logic ---
-        function handleAuth() {
-            const user = document.getElementById('reg-user').value;
-            if(!user) return alert("Please enter a username");
+        function handleCheckIn() {
+            const user = document.getElementById('username').value;
+            if(!user) return alert("Please introduce yourself.");
             
-            // To make this permanent, you'd call Supabase here:
-            // supabase.auth.signUp({ email, password })
-            
-            currentUser = user;
-            document.getElementById('suite-name').innerText = "@" + user;
-            document.getElementById('auth-page').style.display = 'none';
-            document.getElementById('main-header').style.display = 'flex';
-            document.getElementById('footer-nav').style.display = 'flex';
-            showPage('promenade');
-            renderItems();
-            
-            // Simulate a notification
-            setTimeout(() => {
-                document.getElementById('notif-dot').style.display = 'block';
-            }, 3000);
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('main-header').style.display = 'block';
+            document.getElementById('main-nav').style.display = 'flex';
+            showSection('promenade');
+            renderPromenade();
         }
 
-        // --- Navigation ---
-        function showPage(pageId, el) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            if(el) {
-                document.querySelectorAll('.nav-icon').forEach(n => n.classList.remove('active'));
-                el.classList.add('active');
-            }
-        }
-
-        // --- Render Items ---
-        function renderItems() {
-            const globalFeed = document.getElementById('global-items');
-            globalFeed.innerHTML = database.map(item => `
-                <div class="wardrobe-item">
-                    <span class="tier-badge ${item.tier}">${item.tier}</span>
+        function renderPromenade() {
+            const feed = document.getElementById('feed-items');
+            feed.innerHTML = wardrobeDatabase.map(item => `
+                <div class="wardrobe-piece">
+                    <div class="room-key ${item.tier === 'T1' ? 'key-t1' : 'key-t2'}">${item.tier} Piece</div>
                     <img src="${item.img}">
-                    <div style="font-size: 10px; margin-top: 5px;">
-                        <b>${item.name}</b><br>
-                        <span style="color: #999;">${item.owner}</span>
+                    <div class="piece-info">
+                        <div class="piece-name">${item.name}</div>
+                        <div class="resident-handle">Resident: ${item.resident}</div>
                     </div>
                 </div>
             `).join('');
         }
 
-        // --- Upload Logic ---
-        function submitItem() {
-            const name = document.getElementById('upload-name').value;
-            const tier = document.getElementById('tier-select').value;
-            if(!name) return alert("Details required");
-
-            // AI Check Simulation
-            alert("Concierge: Reviewing photo quality...");
+        function showSection(id, el) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
             
-            const newItem = {
-                id: Date.now(),
-                name: name,
-                tier: tier,
-                img: "https://images.unsplash.com/photo-1539109132314-347752418b30?w=600", // Placeholder
-                owner: "@" + currentUser
-            };
+            const titles = { 'promenade': 'The Promenade', 'checkin-piece': 'Wardrobe Check-in' };
+            document.getElementById('page-title').innerText = titles[id];
 
-            database.unshift(newItem);
-            renderItems();
-            showPage('promenade');
-            alert("Piece added to The Promenade.");
-        }
-
-        function generateShipping() {
-            const fee = 12.50;
-            const confirm = window.confirm(`Generate tracked shipping code? A service fee of $${fee} will be charged to your card.`);
-            if(confirm) {
-                alert("Payment processed. Your DHL Waybill has been sent to your email.");
+            if(el) {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                el.classList.add('active');
             }
         }
     </script>
